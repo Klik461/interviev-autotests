@@ -19,6 +19,7 @@ public class PlayerSteps extends BaseApi {
 
     @Step("Create player")
     public static PlayerResponseDto createPlayer(Object body, int... status) {
+        log.info("Create player");
         Response response = post(body, URL + "create/supervisor");
 
         assertStatusCode(response, HttpStatus.SC_CREATED, getNegativeStatus(status));
@@ -28,6 +29,7 @@ public class PlayerSteps extends BaseApi {
 
     @Step("Update player")
     public static PlayerResponseDto updatePlayer(Object body, int... status) {
+        log.info("Update player");
         Response response = put(body, URL + "update/supervisor");
 
         assertStatusCode(response, HttpStatus.SC_OK, getNegativeStatus(status));
@@ -37,6 +39,7 @@ public class PlayerSteps extends BaseApi {
 
     @Step("Get all players")
     public static List<PlayerResponseDto> getAllPlayers() {
+        log.info("Get all players");
         Response response = get(URL + "get/all");
 
         assertStatusCode(response, HttpStatus.SC_OK, 0);
@@ -44,8 +47,9 @@ public class PlayerSteps extends BaseApi {
         return deserializationList(response, "players", PlayerResponseDto.class);
     }
 
-    @Step("Get all players")
+    @Step("Get player by Id")
     public static PlayerResponseDto getPlayerById(int id, int... status) {
+        log.info("Get player by Id");
         Response response = get(URL + "get?playerId=" + id);
 
         assertStatusCode(response, HttpStatus.SC_OK, getNegativeStatus(status));
@@ -55,6 +59,7 @@ public class PlayerSteps extends BaseApi {
 
     @Step("Delete player")
     public static void deletePlayers(Object body, String editorName, int... status) {
+        log.info("Delete player");
         Response response = delete(body, URL + "delete/" + editorName);
 
         assertStatusCode(response, HttpStatus.SC_NO_CONTENT, getNegativeStatus(status));
